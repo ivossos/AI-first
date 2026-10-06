@@ -7,6 +7,7 @@ Run:  python3 mock_servicenow.py [--port 8080]
 """
 import argparse
 import json
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 
@@ -57,7 +58,9 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--port", type=int, default=8080)
-    port = ap.parse_args().port
+    ap.add_argument("--port", type=int, default=int(os.environ.get("PORT", 8080)))
+    ap.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
+    args = ap.parse_args()
+    port = args.port
     print(f"Mock ServiceNow: http://localhost:{port}  |  Teams webhook: http://localhost:{port}/teams-webhook")
-    HTTPServer(("127.0.0.1", port), Handler).serve_forever()
+    HTTPServer((args.host, port), Handler).serve_forever()
