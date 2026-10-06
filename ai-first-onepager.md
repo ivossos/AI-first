@@ -144,5 +144,5 @@ Your finance team learns to use AI practically:
 
 ---
 
-**Contact:** [Your contact info]
-**Website:** [Your website]
+**Contact:** ivossos@gmail.com
+**Website:** https://epmcopilot.com
